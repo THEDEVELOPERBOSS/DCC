@@ -38,7 +38,7 @@ The goal is to finish a complete Version 1 before expanding the project.
 
 * [X] Create `PROJECT_STATUS.md`
 * [X] Decide Python version
-* [ ] Create Python virtual environment
+* [X] Create Python virtual environment
 * [ ] Create initial project structure
 * [ ] Set up dependency management
 * [ ] Verify development environment on Windows
