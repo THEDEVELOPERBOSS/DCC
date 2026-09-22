@@ -37,7 +37,7 @@ The goal is to finish a complete Version 1 before expanding the project.
 ## Phase 0 — Setup
 
 * [X] Create `PROJECT_STATUS.md`
-* [ ] Decide Python version
+* [X] Decide Python version
 * [ ] Create Python virtual environment
 * [ ] Create initial project structure
 * [ ] Set up dependency management
@@ -203,11 +203,13 @@ This section records important decisions made during development and the reasoni
 
 ## Language
 
-**Python**
+**Python 3.14**
 
 Reason:
 
 Python allows the project to focus on software engineering concepts without adding unnecessary language complexity.
+
+Python 3.14 is the target version for DCC Version 1.
 
 ## Database
 
