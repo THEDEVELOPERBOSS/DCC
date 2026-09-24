@@ -10,7 +10,7 @@ It is intentionally separate from the README. The README explains the project; t
 
 **Version:** 0.1.0
 **Phase:** Phase 0 — Setup
-**Status:** 🟡 In Development
+**Status:** Phase 0 done
 
 ---
 
@@ -40,11 +40,11 @@ The goal is to finish a complete Version 1 before expanding the project.
 * [X] Decide Python version
 * [X] Create Python virtual environment
 * [X] Add .gitignore
-* [ ] Create initial project structure
-* [ ] Set up dependency management
-* [ ] Verify development environment on Windows
-* [ ] Verify development environment on Linux
-* [ ] Make first DCC code commit
+* [X] Create initial project structure
+* [X] Set up dependency management
+* [X] Verify development environment on Windows
+* [X] Verify development environment on Linux
+* [X] Make first DCC code commit
 
 ---
 
