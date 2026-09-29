@@ -1,7 +1,32 @@
 # Imports
+from pathlib import Path
 import pick
 import os
 import subprocess
+import json
+
+# Load saved settings
+saved_projs = load_saved_settings()
+
+# project paths
+
+PROJECT_DIR = Path(__file__).resolve().parent
+
+SETTINGS_FILE = PROJECT_DIR / "saved_settings.json"
+
+def load_saved_projs():
+
+    if not SETTINGS_FILE.exists():
+        return {}
+
+    with open(SETTINGS_FILE, "r") as file:
+        return json.load(file)
+
+def save_saved_projs(saved_projs):
+
+    with open(SETTINGS_FILE, "w") as file:
+        json.dump(saved_settings, file, indent=4)
+
 
 def clear_terminal():
     subprocess.run(["cls" if os.name == "nt" else "clear"], check=False)
@@ -29,7 +54,7 @@ def new_proj():
     new_proj_desc = input()
 
     # Save it to JSON
-    save_saved_settings(saved_settings)
+    save_saved_projs(saved_projs)
 
     clear_terminal()
 
