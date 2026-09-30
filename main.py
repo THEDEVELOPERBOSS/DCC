@@ -1,18 +1,35 @@
 # Imports
 from pathlib import Path
-import pick
+from pick import pick
 import os
 import subprocess
 import json
 
-# Load saved settings
-saved_projs = load_saved_settings()
+# Function to clear terminal to make things cleaner
+def clear_terminal():
+    print("\033[2J\033[H", end="")
+
+# Makes it so that the user has time to actually read/interact with what is happening on screen
+def give_time():
+    input("Press enter to return...")
 
 # project paths
 
 PROJECT_DIR = Path(__file__).resolve().parent
 
 SETTINGS_FILE = PROJECT_DIR / "saved_settings.json"
+
+def load_saved_settings():
+
+    if not SETTINGS_FILE.exists():
+        return {}
+
+    with open(SETTINGS_FILE, "r") as file:
+        return json.load(file)
+
+    # Load saved settings
+    saved_projs = load_saved_settings()
+    input("Press enter to return...")
 
 def load_saved_projs():
 
@@ -27,14 +44,6 @@ def save_saved_projs(saved_projs):
     with open(SETTINGS_FILE, "w") as file:
         json.dump(saved_settings, file, indent=4)
 
-
-def clear_terminal():
-    subprocess.run(["cls" if os.name == "nt" else "clear"], check=False)
-    
-# Give time so a while loop or other things don't instantly clear things
-def give_time():
-    input("Press enter to return...")
-
 # make a new project
 def new_proj():
 
@@ -45,13 +54,13 @@ def new_proj():
     print("Create New Project\n")
 
     # Project name
-    new_proj_name = input("What would you like to name this project? ")
+    name = input("What would you like to name this project? ")
 
     # Description of project
     clear_terminal()
-    print(f"Creating {new_proj_name}\n")
+    print(f"Creating {name}\n")
     print("Description of project(Goals, Timeframe, Why you are building it, etc)")
-    new_proj_desc = input()
+    desc = input()
 
     # Save it to JSON
     save_saved_projs(saved_projs)
@@ -64,34 +73,36 @@ def new_proj():
 
 # overview of current projects
 def view_current():
-    
+    pass
 def main():
+    
+    clear_terminal()
     print("Developer Command Center")
     print("DCC is the new way for developers to keep track of their projects. It tracks progress, roadblocks, and when you last worked on somehting so you\n know when it is time to jump back in")
-    user_input = ( "Would you like to: \n"
+    user_input = ("Would you like to: \n"
                 "Open a new project \n"
-                "Overview of current projects \n"
+                "See overview of current projects \n"
                 "Update a project \n" 
                 "Exit DCC "
     )
     options = [
-        "new_project"
-        "overview_current_projects"
-        "update_proj"
-        "exit"
+        "New project",
+        "Overview of current projects",
+        "Update a project",
+        "Exit"
     ]
 
     option, index = pick(options, user_input, indicator="=>", default_index=0)
 
-    if option == "new_project":
+    if option == "New project":
         new_proj()
-    elif option == "overview_current_projects":
+    elif option == "Overview of current projects":
         clear_terminal()
     
-    elif option == "update_proj":
-        update_proj()
-    elif option == "exit":
+    elif option == "Update a project":
+        # update_proj()
+        pass
+    elif option == "Exit":
         exit()
         
-           
-    
+main()
