@@ -17,7 +17,8 @@ PROJECT_DIR = Path(__file__).resolve().parent
 
 PROJECTS_FILE = PROJECT_DIR / "saved_projs.json"
 
-def load_saved_projects(): # rename this to project 
+# Loads saved projects
+def load_saved_projects():
 
     if not PROJECTS_FILE.exists():
         return {}
@@ -65,7 +66,19 @@ def new_proj():
 
 # overview of current projects
 def view_current():
-    pass
+    pass # build this out
+def update_proj():
+    
+    global saved_settings
+    
+    load_saved_projects()
+    
+    if not saved_settings: # not means it will execute if the file is empty
+        print("No saved projects yet")
+    else: 
+        for name in saved_projects:
+            print(f"- {name}")
+    print("What project do you want to edit")
 def main():
     while True:
         clear_terminal()
@@ -92,7 +105,7 @@ def main():
             clear_terminal()
             pass
         elif option == "Update a project":
-            # update_proj()
+            update_proj()
             pass
         elif option == "Exit":
             exit()
