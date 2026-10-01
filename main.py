@@ -1,8 +1,6 @@
 # Imports
 from pathlib import Path
 from pick import pick
-import os
-import subprocess
 import json
 
 # Function to clear terminal to make things cleaner
@@ -17,37 +15,26 @@ def give_time():
 
 PROJECT_DIR = Path(__file__).resolve().parent
 
-SETTINGS_FILE = PROJECT_DIR / "saved_settings.json"
+PROJECTS_FILE = PROJECT_DIR / "saved_projs.json"
 
-def load_saved_settings():
+def load_saved_projects(): # rename this to project 
 
-    if not SETTINGS_FILE.exists():
+    if not PROJECTS_FILE.exists():
         return {}
 
-    with open(SETTINGS_FILE, "r") as file:
+    with open(PROJECTS_FILE, "r") as file:
         return json.load(file)
 
-    # Load saved settings
-    saved_projs = load_saved_settings()
-    input("Press enter to return...")
+# Load saved settings
+saved_projects = load_saved_projects()
 
-def load_saved_projs():
+def save_saved_projects(saved_projects):
 
-    if not SETTINGS_FILE.exists():
-        return {}
-
-    with open(SETTINGS_FILE, "r") as file:
-        return json.load(file)
-
-def save_saved_projs(saved_projs):
-
-    with open(SETTINGS_FILE, "w") as file:
-        json.dump(saved_settings, file, indent=4)
+    with open(PROJECTS_FILE, "w") as file:
+        json.dump(saved_projects, file, indent=4)
 
 # make a new project
 def new_proj():
-
-    global saved_settings
 
     clear_terminal()
 
@@ -62,8 +49,13 @@ def new_proj():
     print("Description of project(Goals, Timeframe, Why you are building it, etc)")
     desc = input()
 
+    # project layout
+    saved_projects[name] = {
+        "desc": desc
+    }
+    
     # Save it to JSON
-    save_saved_projs(saved_projs)
+    save_saved_projects(saved_projects)
 
     clear_terminal()
 
@@ -75,34 +67,34 @@ def new_proj():
 def view_current():
     pass
 def main():
-    
-    clear_terminal()
-    print("Developer Command Center")
-    print("DCC is the new way for developers to keep track of their projects. It tracks progress, roadblocks, and when you last worked on somehting so you\n know when it is time to jump back in")
-    user_input = ("Would you like to: \n"
-                "Open a new project \n"
-                "See overview of current projects \n"
-                "Update a project \n" 
-                "Exit DCC "
-    )
-    options = [
-        "New project",
-        "Overview of current projects",
-        "Update a project",
-        "Exit"
-    ]
-
-    option, index = pick(options, user_input, indicator="=>", default_index=0)
-
-    if option == "New project":
-        new_proj()
-    elif option == "Overview of current projects":
+    while True:
         clear_terminal()
-    
-    elif option == "Update a project":
-        # update_proj()
-        pass
-    elif option == "Exit":
-        exit()
+        print("Developer Command Center")
+        print("DCC is the new way for developers to keep track of their projects. It tracks progress, roadblocks, and when you last worked on somehting so you\n know when it is time to jump back in")
+        user_input = ("Would you like to: \n"
+                    "Open a new project \n"
+                    "See overview of current projects \n"
+                    "Update a project \n" 
+                    "Exit DCC "
+        )
+        options = [
+            "New project",
+            "Overview of current projects",
+            "Update a project",
+            "Exit"
+        ]
+
+        option, index = pick(options, user_input, indicator="=>", default_index=0)
+
+        if option == "New project":
+            new_proj()
+        elif option == "Overview of current projects":
+            clear_terminal()
+            pass
+        elif option == "Update a project":
+            # update_proj()
+            pass
+        elif option == "Exit":
+            exit()
         
 main()
